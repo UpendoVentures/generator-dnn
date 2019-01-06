@@ -1,70 +1,69 @@
-{
-  "name": "generator-dnn",
-  "version": "1.0.7",
-  "description": "Scaffolds DNN Modules, Persona Bar, Skin projects",
-  "homepage": "https://github.com/mtrutledge/generator-dnn/wiki",
-  "author": {
-    "name": "Matt Rutledge",
-    "email": "mtrutledge@gmail.com",
-    "url": "https://github.com/mtrutledge"
-  },
-  "files": ["generators"],
-  "main": "generators/index.js",
-  "keywords": ["yeoman-generator", "dnn", "dotnetnuke", "evoq"],
+ {
+  "name":"generator-upendodnn", 
+  "version":"1.0.7", 
+  "description":"Scaffolds DNN Modules, Persona Bar, Skin projects (based on the generator built by Matt Rutledge", 
+  "homepage":"https://github.com/UpendoVentures/generator-dnn",
+"author": {
+    "name":"Upendo Ventures", 
+    "email":"solutions@upendoventures.com", 
+    "url":"https://upendoventures.com"
+}, 
+  "files":["generators"], 
+  "main":"generators/index.js", 
+  "keywords":["yeoman-generator", "dnn", "dotnetnuke", "evoq", "upendo"], 
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-config-xo": "^0.22.1",
-    "eslint-plugin-prettier": "^2.6.0",
-    "husky": "^0.14.3",
-    "jest": "^22.4.3",
-    "jest-cli": "^22.4.3",
-    "lint-staged": "^7.1.0",
-    "nsp": "^3.2.1",
-    "prettier": "^1.12.1",
-    "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^1.7.0",
-    "yo": "^2.0.2"
-  },
+    "eslint":"^4.19.1", 
+    "eslint-config-prettier":"^2.4.0", 
+    "eslint-config-xo":"^0.22.1", 
+    "eslint-plugin-prettier":"^2.6.0", 
+    "husky":"^0.14.3", 
+    "jest":"^22.4.3", 
+    "jest-cli":"^22.4.3", 
+    "lint-staged":"^7.1.0", 
+    "nsp":"^3.2.1", 
+    "prettier":"^1.12.1", 
+    "yeoman-assert":"^3.1.1", 
+    "yeoman-test":"^1.7.0", 
+    "yo":"^2.0.2"
+  }, 
   "dependencies": {
-    "chalk": "^2.4.1",
-    "dotnet-solution": "^0.2.0",
-    "pascal-case": "^2.0.1",
-    "uuid-v4": "^0.1.0",
-    "yeoman-generator": "^2.0.5",
-    "yosay": "^2.0.2"
-  },
+    "chalk":"^2.4.1", 
+    "dotnet-solution":"^0.2.0", 
+    "pascal-case":"^2.0.1", 
+    "uuid-v4":"^0.1.0", 
+    "yeoman-generator":"^2.0.5", 
+    "yosay":"^2.0.2"
+  }, 
   "jest": {
-    "testEnvironment": "node"
-  },
+    "testEnvironment":"node"
+  }, 
   "scripts": {
-    "precommit": "lint-staged",
-    "test": "jest",
-    "preversion": "npm test",
-    "postversion": "git push && git push --tags"
-  },
+    "precommit":"lint-staged", 
+    "test":"jest", 
+    "preversion":"npm test", 
+    "postversion":"git push && git push --tags"
+  }, 
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
-    "*.json": ["prettier --write", "git add"]
-  },
+    "*.js":["eslint --fix", "git add"], 
+    "*.json":["prettier --write", "git add"]
+  }, 
   "eslintConfig": {
-    "extends": ["xo", "prettier"],
+    "extends":["xo", "prettier"], 
     "env": {
-      "jest": true,
-      "node": true
-    },
+      "jest":true, 
+      "node":true
+    }, 
     "rules": {
-      "linebreak-style": 0,
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "printWidth": 90
+      "linebreak-style":0, 
+      "prettier/prettier":[
+        "error",  {
+          "singleQuote":true, 
+          "printWidth":90
         }
       ]
-    },
-    "plugins": ["prettier"]
-  },
-  "repository": "mtrutledge/generator-dnn",
-  "license": "MIT"
+    }, 
+    "plugins":["prettier"]
+  }, 
+  "repository":"UpendoVentures/generator-dnn", 
+  "license":"MIT"
 }

@@ -1,9 +1,9 @@
-{
+ {
   "generator-node": {
     "promptValues": {
-      "authorName": "Matt Rutledge",
-      "authorEmail": "mtrutledge@gmail.com",
-      "authorUrl": ""
-    }
+      "authorName":"Upendo Ventures", 
+      "authorEmail":"solutions@upendoventures.com", 
+      "authorUrl":"https://upendoventures.com"
+}
   }
 }
