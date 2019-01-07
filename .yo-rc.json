@@ -1,9 +1,9 @@
- {
+{
   "generator-node": {
     "promptValues": {
-      "authorName":"Upendo Ventures", 
-      "authorEmail":"solutions@upendoventures.com", 
-      "authorUrl":"https://upendoventures.com"
-}
+      "authorName": "Upendo Ventures",
+      "authorEmail": "support@upendoventures.com",
+      "authorUrl": "https://upendoventures.com"
+    }
   }
 }

@@ -9,11 +9,11 @@ describe('generator-dnn:mvc', () => {
       .run(path.join(__dirname, '../generators/mvc'))
       .withArguments(['--noinstall'])
       .withPrompts({
-        company: 'Believe',
+        company: 'Upendo Ventures',
         name: 'TestMVC',
         description: 'Test Build Module',
-        companyUrl: 'www.believekids.com',
-        emailAddy: 'mtrutledge@gmail.com'
+        companyUrl: 'upendoventures.com',
+        emailAddy: 'support@upendoventures.com'
       });
   });
 
