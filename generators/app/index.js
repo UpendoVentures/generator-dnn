@@ -3,6 +3,14 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const glob = require('glob');
+const updateNotifier = require('update-notifier');
+const pkg = require('../../package.json');
+
+updateNotifier({
+  pkg
+}).notify({
+  message: 'Run yo and select Update Generators to get the latest'
+});
 
 module.exports = class extends Generator {
   prompting() {
@@ -55,11 +63,7 @@ module.exports = class extends Generator {
           solutionChoice,
           { name: 'MVC Module', value: 'mvc' },
           { name: 'SPA Module', value: 'spa' },
-          {
-            name: chalk.gray('Persona Bar'),
-            value: 'personabar',
-            disabled: chalk.gray('Coming Soon')
-          },
+          { name: 'Persona Bar'), value: 'personabar' },
           {
             name: chalk.gray('Library'),
             value: 'library',
@@ -84,13 +88,6 @@ module.exports = class extends Generator {
             name: chalk.gray('Hotcakes Commerce Viewset'),
             value: 'viewset',
             disabled: chalk.gray('Coming Soon')
-          },
-          {
-            name: chalk.gray('Theme'),
-            value: 'theme',
-            disabled: chalk.gray(
-              'For the best starter DNN theme use nvQuickTheme (https://www.nvquicktheme.com)'
-            )
           }
         ]
       }
