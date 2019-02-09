@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-// Const glob = require("glob");
+const glob = require('glob');
 
 module.exports = class extends Generator {
   prompting() {
@@ -28,6 +28,23 @@ module.exports = class extends Generator {
         chalk.italic.white(' maintained by the most honorable Matt Rutledge.\n\n')
     );
 
+    // Does the solution already exist? then customize the wizard
+    var gOptions = { cwd: '../' };
+    var globbed = glob.sync('*.sln', gOptions);
+    var solutionChoice = [];
+
+    if (globbed && globbed.length) {
+      // There is a solution file in the folder above
+      solutionChoice = {
+        name: 'Solution Structure',
+        value: 'solution',
+        disabled: 'Already in a solution structure'
+      };
+    } else {
+      // This may be the first time using this in the current folder
+      solutionChoice = { name: 'Solution Structure', value: 'solution' };
+    }
+
     const prompts = [
       {
         when: !this.options.projType,
@@ -35,7 +52,7 @@ module.exports = class extends Generator {
         name: 'projType',
         message: 'What type of project would you like to scaffold?',
         choices: [
-          { name: 'Solution Structure', value: 'solution' },
+          solutionChoice,
           { name: 'MVC Module', value: 'mvc' },
           { name: 'SPA Module', value: 'spa' },
           {
@@ -78,22 +95,6 @@ module.exports = class extends Generator {
         ]
       }
     ];
-
-    /*	
-	Var error = null;
-	var fileList = null;
-	var gOptions = { cwd: "../" };
-	var globbed = glob("*.sln", gOptions, function(err, files){
-		this.log(chalk.yellow("err = " + err));
-		this.log(chalk.yellow("files = " + files));
-		error = err;
-		fileList = files;
-	});
-	
-	this.log(chalk.yellow("globbed = " + globbed));	
-	this.log(chalk.yellow("err = " + error));
-	this.log(chalk.yellow("files = " + fileList));
-*/
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
