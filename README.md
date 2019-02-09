@@ -1,5 +1,5 @@
-# generator-dnn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Scaffolds DNN / DotNetNuke Modules, Persona Bar, Skin projects
+# generator-upendodnn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+> Scaffolds DNN / DotNetNuke Modules, Persona Bar, Skin solutions
 
 ## Installation
 
@@ -7,7 +7,7 @@ First, install [Yeoman](http://yeoman.io) and generator-dnn using [npm](https://
 
 ```bash
 npm install -g yo
-npm install -g generator-dnn
+npm install -g generator-upendodnn
 ```
 
 Then generate your new project:
