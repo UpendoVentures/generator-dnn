@@ -44,9 +44,9 @@ module.exports = class extends Generator {
     if (globbed && globbed.length) {
       // There is a solution file in the folder above
       solutionChoice = {
-        name: 'Solution Structure',
+        name: chalk.gray('Solution Structure'),
         value: 'solution',
-        disabled: 'Already in a solution structure'
+        disabled: chalk.gray('Already in a solution structure')
       };
     } else {
       // This may be the first time using this in the current folder
@@ -63,7 +63,7 @@ module.exports = class extends Generator {
           solutionChoice,
           { name: 'MVC Module', value: 'mvc' },
           { name: 'SPA Module', value: 'spa' },
-          { name: 'Persona Bar'), value: 'personabar' },
+          { name: 'Persona Bar', value: 'personabar' },
           {
             name: chalk.gray('Library'),
             value: 'library',
