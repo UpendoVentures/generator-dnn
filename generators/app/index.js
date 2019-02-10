@@ -53,6 +53,10 @@ module.exports = class extends Generator {
       solutionChoice = { name: 'Solution Structure', value: 'solution' };
     }
 
+    //
+    // TODO: Add logic to look for solution folders (e.g., Modules) and disable the extensions below until the solution is created.
+    //
+
     const prompts = [
       {
         when: !this.options.projType,
@@ -64,6 +68,7 @@ module.exports = class extends Generator {
           { name: 'MVC Module', value: 'mvc' },
           { name: 'SPA Module', value: 'spa' },
           { name: 'Persona Bar', value: 'personabar' },
+          { name: 'Skin Object', value: 'skinobject' },
           {
             name: chalk.gray('Library'),
             value: 'library',
