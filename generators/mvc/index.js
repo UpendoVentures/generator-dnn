@@ -68,6 +68,7 @@ module.exports = class extends DnnGeneratorBase {
       props.currentDate = new Date();
       props.namespace = this._pascalCaseName(props.company);
       props.moduleName = this._pascalCaseName(props.name);
+	  props.extensionType = "Modules";
 
       this.props = props;
     });
@@ -75,6 +76,9 @@ module.exports = class extends DnnGeneratorBase {
 
   writing() {
     this.log(chalk.white('Creating MVC Module.'));
+	
+	// mod: this follows the Upendo development/solution pattern
+	this.destinationRoot("Modules/");
 
     let namespace = this.props.namespace;
     let moduleName = this.props.moduleName;

@@ -104,7 +104,7 @@ module.exports = class extends Generator {
       projType: this.props.value
     };
 
-    this.log(chalk.yellow('Looking for: ' + this.props.projType));
+    //this.log(chalk.yellow('Looking for: ' + this.props.projType));
 
     this.composeWith(require.resolve('../' + this.props.projType), options);
   }

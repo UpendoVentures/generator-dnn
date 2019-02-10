@@ -27,28 +27,30 @@ module.exports = class DnnGeneratorBase extends Generator {
 
   _createSolutionFromTemplate() {
     this.log(chalk.white('Creating sln.'));
+	let namespace = this._getNamespace();
     return this.spawnCommandSync('dotnet', [
       'new',
       'sln',
       '-n',
-      this.props.company,
+      namespace,
       '-o',
       this.destinationRoot()
     ]);
   }
 
   _addProjectToSolution() {
+	let namespace = this._getNamespace();
     this.log(chalk.white('Adding project to sln.'));
     this.spawnCommandSync('dotnet', [
       'sln',
-      this.destinationPath(this.props.company + '.sln'),
+      this.destinationPath(namespace + '.sln'),
       'add',
       this.destinationPath(`${this.props.moduleName}/${this.props.moduleName}.csproj`)
     ]);
   }
 
   _writeSolution() {
-    let namespace = this.props.company;
+    let namespace = this._getNamespace();
     let slnFileName = this.destinationPath(namespace + '.sln');
     this.log(
       chalk.white(
@@ -70,6 +72,15 @@ module.exports = class DnnGeneratorBase extends Generator {
         moduleName: moduleName
       }
     );
+  }
+  
+  _getNamespace(){
+	let namespace = this.props.company;
+	if(this.props.extensionType != undefined && this.props.extensionType != ""){
+		namespace = namespace + "." + this.props.extensionType;
+	}
+	namespace = namespace + "." + this.props.moduleName;
+	return namespace;
   }
 
   _defaultInstall() {
