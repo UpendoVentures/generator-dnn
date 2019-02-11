@@ -70,11 +70,7 @@ module.exports = class extends Generator {
           { name: 'Webforms Module', value: 'webforms' },
           { name: 'Persona Bar', value: 'personabar' },
           { name: 'Skin Object', value: 'skinobject' },
-          {
-            name: chalk.gray('Library'),
-            value: 'library',
-            disabled: chalk.gray('Coming Soon')
-          },
+          { name: 'Library', value: 'library' },
           {
             name: chalk.gray('Library: Scheduled Job'),
             value: 'library-schduler',

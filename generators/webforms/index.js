@@ -125,6 +125,12 @@ module.exports = class extends DnnGeneratorBase {
     );
 
     this.fs.copyTpl(
+      this.templatePath('../../common/packaging/**'),
+      this.destinationPath(moduleName + '/'),
+      template
+    );
+
+    this.fs.copyTpl(
       this.templatePath('Components/**'),
       this.destinationPath(moduleName + '/Components/'),
       template
