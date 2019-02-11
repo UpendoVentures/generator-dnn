@@ -12,11 +12,7 @@ module.exports = class extends DnnGeneratorBase {
         message: 'What language do you want your SPA Module to use?',
         choices: [
           { name: 'ReactJS', value: 'ReactJS' },
-          {
-            name: chalk.gray('Angular'),
-            value: 'angular',
-            disabled: chalk.gray('Coming Soon')
-          },
+          { name: 'Angular 5', value: 'Angular5' },
           {
             name: chalk.gray('VueJS'),
             value: 'VueJS',
@@ -40,7 +36,7 @@ module.exports = class extends DnnGeneratorBase {
         when: !this.options.company,
         type: 'input',
         name: 'company',
-        message: 'Namespace for your module (Usually a company name)?',
+        message: 'Namespace for your SPA module (Usually a company name)?',
         store: true,
         validate: str => {
           return str.length > 0;
@@ -60,7 +56,7 @@ module.exports = class extends DnnGeneratorBase {
         when: !this.options.description,
         type: 'input',
         name: 'description',
-        message: 'Describe your module:',
+        message: 'Describe your SPA module:',
         validate: str => {
           return str.length > 0;
         }
@@ -93,6 +89,8 @@ module.exports = class extends DnnGeneratorBase {
       props.namespace = this._pascalCaseName(props.company);
       props.moduleName = this._pascalCaseName(props.name);
 	  props.extensionType = "Modules";
+      props.fullNamespace = props.namespace + "." + props.extensionType + "." + props.moduleName;
+      props.guid = this._generateGuid();
 
       this.props = props;
     });
@@ -111,6 +109,8 @@ module.exports = class extends DnnGeneratorBase {
     let namespace = this.props.namespace;
     let moduleName = this.props.moduleName;
     let currentDate = this.props.currentDate;
+    let fullNamespace = this.props.fullNamespace;
+    let guid = this.props.guid;
 
     let template = {
       namespace: namespace,
@@ -122,7 +122,10 @@ module.exports = class extends DnnGeneratorBase {
       currentYear: currentDate.getFullYear(),
       version: '1.0.0',
       menuLinkName: this.props.menuLinkName,
-      parentMenu: this.props.parentMenu
+      parentMenu: this.props.parentMenu,
+      extensionType: this.props.extensionType,
+      fullNamespace: this.props.fullNamespace,
+      guid: this.props.guid
     };
 
     this.fs.copyTpl(

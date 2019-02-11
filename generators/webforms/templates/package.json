@@ -5,9 +5,9 @@
   "dnnModule": {
     "fullName":"<%= fullNamespace %>", 
     "friendlyName":"<%= moduleName %> Module", 
-    "packageName":"<%= namespace %>_<%= moduleName %>", 
+    "packageName":"<%= fullNamespace %>", 
     "owner": {
-      "name":"<%= moduleName %>", 
+      "name":"<%= namespace %>", 
       "organization":"<%= namespace %>", 
       "url":"<%= companyUrl %>.org", 
       "email":"<%= emailAddy %>"

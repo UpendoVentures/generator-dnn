@@ -18,7 +18,8 @@ module.exports = class DnnGeneratorBase extends Generator {
   }
 
   _generateGuid() {
-    return uuid();
+	var guid = uuid();
+    return guid.toUpperCase();
   }
 
   _pascalCaseName(val) {
