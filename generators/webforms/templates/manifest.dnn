@@ -40,7 +40,7 @@
             <moduleName><%= moduleName %></moduleName>
             <foldername><%= moduleName %></foldername>
             <businessControllerClass><%= fullNamespace %>.Components.<%= moduleName %>Controller, <%= fullNamespace %></businessControllerClass>
-            <supportedFeatures></supportedFeatures>
+            <supportedFeatures />
             <moduleDefinitions>
               <moduleDefinition>
                 <friendlyName><%= moduleName %></friendlyName>
