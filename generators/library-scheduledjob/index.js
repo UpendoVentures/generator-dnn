@@ -16,7 +16,7 @@ module.exports = class extends DnnGeneratorBase {
         when: !this.options.company,
         type: 'input',
         name: 'company',
-        message: 'Namespace for your library (Usually a company name)?',
+        message: 'Namespace for your scheduled job (Usually a company name)?',
         store: true,
         validate: str => {
           return str.length > 0;
@@ -26,7 +26,7 @@ module.exports = class extends DnnGeneratorBase {
         when: !this.options.name,
         type: 'input',
         name: 'name',
-        message: 'What is the name of your library?',
+        message: 'What is the name of your scheduled job?',
         default: this.appname,
         validate: str => {
           return str.length > 0;
@@ -36,7 +36,7 @@ module.exports = class extends DnnGeneratorBase {
         when: !this.options.description,
         type: 'input',
         name: 'description',
-        message: 'Describe your library:',
+        message: 'Describe your scheduled job:',
         validate: str => {
           return str.length > 0;
         }

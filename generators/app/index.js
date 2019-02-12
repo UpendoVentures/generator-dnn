@@ -71,11 +71,7 @@ module.exports = class extends Generator {
           { name: 'Persona Bar', value: 'personabar' },
           { name: 'Skin Object', value: 'skinobject' },
           { name: 'Library', value: 'library' },
-          {
-            name: chalk.gray('Library: Scheduled Job'),
-            value: 'library-schduler',
-            disabled: chalk.gray('Coming Soon')
-          },
+          { name: 'Library: Scheduled Job', value: 'library-scheduledjob' },
           {
             name: chalk.gray('Library: Hotcakes Commerce Workflow'),
             value: 'library-hccworkflow',
