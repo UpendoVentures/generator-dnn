@@ -88,7 +88,7 @@
             <attributes>
               <businessControllerClass><%= fullNamespace %>.Components.<%= moduleName %>Controller, <%= fullNamespace %></businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList />
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
             </attributes>
           </eventMessage>
         </component>
