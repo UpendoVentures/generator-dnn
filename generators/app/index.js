@@ -90,7 +90,28 @@ module.exports = class extends Generator {
             disabled: chalk.gray('Coming Soon')
           }
         ]
-      }
+      }/*,
+      {
+        when: !this.options.dnnHost,
+        type: 'input',
+        name: 'dnnHost',
+        message: 'What is the URL to your local DNN site?',
+        default: 'http://dnndev.me',
+        store: true,
+        validate: str => {
+          return str.length > 0;
+        }
+      },
+      {
+        when: !this.options.dnnRoot,
+        type: 'input',
+        name: 'dnnRoot',
+        message: 'What is the local path to the root of your DNN site?',
+        store: true,
+        validate: str => {
+          return str.length > 0;
+        }
+      }*/
     ];
 
     return this.prompt(prompts).then(props => {
