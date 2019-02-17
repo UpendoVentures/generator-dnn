@@ -22,8 +22,9 @@
       <Images Include="Images/**/*.*" />
       <JsFiles Include="js/**/*.*" />
       <Styles Include="Styles/**/*.*" />
+      <Libraries Include="bin/*.dll;bin/*.pdb" />
       <DataProvider Include="Providers/DataProviders/SqlDataProvider/*.SqlDataProvider" />
-      <Resources Include="@(Manifest);@(TextFiles);@(SourceFiles);@(Views);@(ResourceFiles);@(Images);@(JsFiles);@(Styles);@(DataProvider)" />
+      <Resources Include="@(Manifest);@(TextFiles);@(SourceFiles);@(Views);@(ResourceFiles);@(Images);@(JsFiles);@(Styles);@(Libraries);@(DataProvider)" />
     </ItemGroup>
   </Target>
   <ItemGroup>
@@ -50,6 +51,7 @@
     <Copy SourceFiles="@(Images)" DestinationFolder="$(FullModulePath)\Images\%(RecursiveDir)" />
     <Copy SourceFiles="@(JsFiles)" DestinationFolder="$(FullModulePath)\Scripts\%(RecursiveDir)" />
     <Copy SourceFiles="@(Styles)" DestinationFolder="$(FullModulePath)\Styles\%(RecursiveDir)" />
+    <Copy SourceFiles="@(Libraries)" DestinationFolder="$(WebsitePath)\bin" />
     <Copy SourceFiles="@(DataProvider)" DestinationFolder="$(FullModulePath)\Providers\DataProviders\SqlDataProvider" />
   </Target>
 </Project>
