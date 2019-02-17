@@ -1,17 +1,11 @@
-﻿/*
-' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
-' TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-' THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-' DEALINGS IN THE SOFTWARE.
-*/
-using DotNetNuke.Web.Mvc.Framework.Controllers;
+﻿
 using DotNetNuke.Collections;
-using System.Web.Mvc;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
+using DotNetNuke.Web.Mvc.Framework.Controllers;
+using System.Web.Mvc;
 
-namespace <%= namespace%>.Modules.<%= moduleName %>.Controllers
+namespace <%= fullNamespace %>.Controllers
 {
     [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
     [DnnHandleError]
@@ -25,8 +19,8 @@ namespace <%= namespace%>.Modules.<%= moduleName %>.Controllers
         public ActionResult Settings()
         {
             var settings = new Models.Settings();
-            settings.Setting1 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("Setting1", false);
-            settings.Setting2 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("Setting2", System.DateTime.Now);
+            settings.Setting1 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("<%= fullNamespace %>_Setting1", false);
+            settings.Setting2 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("<%= fullNamespace %>_Setting2", System.DateTime.Now);
 
             return View(settings);
         }
@@ -34,15 +28,17 @@ namespace <%= namespace%>.Modules.<%= moduleName %>.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="supportsTokens"></param>
+        /// <param name="settings"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
         [DotNetNuke.Web.Mvc.Framework.ActionFilters.ValidateAntiForgeryToken]
         public ActionResult Settings(Models.Settings settings)
         {
-            ModuleContext.Configuration.ModuleSettings["Setting1"] = settings.Setting1.ToString();
-            ModuleContext.Configuration.ModuleSettings["Setting2"] = settings.Setting2.ToUniversalTime().ToString("u");
+			var security = new PortalSecurity();
+			
+            ModuleContext.Configuration.ModuleSettings["<%= fullNamespace %>_Setting1"] = security.InputFilter(settings.Setting1.ToString().Trim(), PortalSecurity.FilterFlag.NoMarkup);
+            ModuleContext.Configuration.ModuleSettings["<%= fullNamespace %>_Setting2"] = security.InputFilter(settings.Setting2.ToUniversalTime().ToString("u"), PortalSecurity.FilterFlag.NoMarkup);
 
             return RedirectToDefaultRoute();
         }

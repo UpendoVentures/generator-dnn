@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="<%= fullNamespace %>" type="Module" version="01.00.00">
-      <friendlyName><%= moduleName %> Module</friendlyName>
+    <package name="<%= moduleName %>" type="Module" version="1.0.0.0">
+      <friendlyName><%= moduleName %></friendlyName>
       <description><%= description %></description>
-      <iconFile>DesktopModules/MVC/<%= fullNamespace %>/Images/logo.png</iconFile>
+      <iconFile>~/DesktopModules/MVC/<%= namespace %>/<%= moduleName %>/Resources/img/extension.png</iconFile>
       <owner>
         <name><%= namespace %></name>
         <organization><%= namespace %></organization>
         <url><%= companyUrl %></url>
-        <email><%= emailAddy %></email>
+        <email><![CDATA[<a href="mailto:<%= emailAddy %>"><%= emailAddy %></a>]]></email>
       </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
+      <license src="License.txt">
+      </license>
+      <releaseNotes src="ReleaseNotes.txt">
+      </releaseNotes>
       <dependencies>
-        <dependency type="CoreVersion">08.00.00</dependency>
+        <dependency type="CoreVersion">08.00.01</dependency>
       </dependencies>
       <components>
         <component type="Script">
           <scripts>
-            <basePath>DesktopModules\MVC\<%= fullNamespace %></basePath>
+            <basePath>DesktopModules\MVC\<%= namespace %>\<%= moduleName %></basePath>
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>01.00.00.SqlDataProvider</name>
@@ -35,7 +36,7 @@
         </component>
         <component type="ResourceFile">
           <resourceFiles>
-            <basePath>DesktopModules/MVC/<%= fullNamespace %></basePath>
+            <basePath>DesktopModules/MVC/<%= namespace %>/<%= moduleName %></basePath>
             <resourceFile>
               <name>Resources.zip</name>
             </resourceFile>
@@ -44,27 +45,27 @@
         <component type="Module">
           <desktopModule>
             <moduleName><%= moduleName %></moduleName>
-            <foldername><%= fullNamespace %></foldername>
-            <businessControllerClass><%= fullNamespace %>.Components.<%= moduleName %>Controller, <%= fullNamespace %></businessControllerClass>
+            <foldername><%= namespace %>/<%= moduleName %></foldername>
+            <businessControllerClass />
             <supportedFeatures />
             <moduleDefinitions>
               <moduleDefinition>
-                <friendlyName><%= moduleName %></friendlyName>
+                <friendlyName><%= moduleFriendlyName %></friendlyName>
                 <defaultCacheTime>0</defaultCacheTime>
                 <moduleControls>
                   <moduleControl>
-                    <controlKey />
-                    <controlSrc><%= fullNamespace %>.Controllers/Example/Index.mvc</controlSrc>
+                    <controlKey>
+                    </controlKey>
+                    <controlSrc><%= namespace%>.Modules.<%= moduleName %>.Controllers/Home/Index.mvc</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
+                    <controlTitle><%= moduleName %> MVC</controlTitle>
                     <controlType>View</controlType>
                     <iconFile />
                     <helpUrl />
-                    <viewOrder>0</viewOrder>
                   </moduleControl>
                   <moduleControl>
                     <controlKey>Edit</controlKey>
-                    <controlSrc><%= fullNamespace %>.Controllers/Example/Edit.mvc</controlSrc>
+                    <controlSrc><%= namespace%>.Modules.<%= moduleName %>.Controllers/Home/Edit.mvc</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle>Edit Content</controlTitle>
                     <controlType>Edit</controlType>
@@ -75,7 +76,7 @@
                   </moduleControl>
                   <moduleControl>
                     <controlKey>Settings</controlKey>
-                    <controlSrc><%= fullNamespace %>.Controllers/Settings/Settings.mvc</controlSrc>
+                    <controlSrc><%= namespace%>.Modules.<%= moduleName %>.Controllers/Settings/Settings.mvc</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle><%= moduleName %> Settings</controlTitle>
                     <controlType>Edit</controlType>
@@ -84,25 +85,17 @@
                     <viewOrder>0</viewOrder>
                   </moduleControl>
                 </moduleControls>
+                <permissions>
+                </permissions>
               </moduleDefinition>
             </moduleDefinitions>
           </desktopModule>
-          <eventMessage>
-            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
-            <processorCommand>UpgradeModule</processorCommand>
-            <attributes>
-              <businessControllerClass><%= fullNamespace %>.Components.<%= moduleName %>Controller, <%= fullNamespace %></businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.00</upgradeVersionsList>
-            </attributes>
-          </eventMessage>
         </component>
         <component type="Assembly">
           <assemblies>
             <assembly>
-              <name><%= fullNamespace %>.dll</name>
               <path>bin</path>
-              <version>01.00.00</version>
+              <name><%= namespace %>.<%= moduleName %>.dll</name>
             </assembly>
           </assemblies>
         </component>

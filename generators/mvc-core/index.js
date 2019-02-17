@@ -23,16 +23,6 @@ module.exports = class extends DnnGeneratorBase {
         }
       },
       {
-        when: !this.options.objectPrefix,
-        type: 'input',
-        name: 'objectPrefix',
-        message: 'What would be a good abbreviation for that (e.g., abc for Awesome Beverages Company)?',
-        store: true,
-        validate: str => {
-          return str.length > 0 && str.length < 6;
-        }
-      },
-      {
         when: !this.options.name,
         type: 'input',
         name: 'name',
@@ -78,9 +68,7 @@ module.exports = class extends DnnGeneratorBase {
       props.currentDate = new Date();
       props.namespace = this._pascalCaseName(props.company);
       props.moduleName = this._pascalCaseName(props.name);
-	    props.extensionType = "Modules";
-      props.fullNamespace = props.namespace + "." + props.extensionType + "." + props.moduleName;
-      props.guid = this._generateGuid();
+	  props.extensionType = "Modules";
 
       this.props = props;
     });
@@ -95,7 +83,6 @@ module.exports = class extends DnnGeneratorBase {
     let namespace = this.props.namespace;
     let moduleName = this.props.moduleName;
     let currentDate = this.props.currentDate;
-    let fullNamespace = this.props.fullNamespace;
 
     let template = {
       namespace: namespace,
@@ -107,12 +94,20 @@ module.exports = class extends DnnGeneratorBase {
       currentYear: currentDate.getFullYear(),
       version: '1.0.0',
       menuLinkName: this.props.menuLinkName,
-      parentMenu: this.props.parentMenu,
-      extensionType: this.props.extensionType,
-      fullNamespace: this.props.fullNamespace,
-      guid: this.props.guid,
-      objectPrefix: this.props.objectPrefix
+      parentMenu: this.props.parentMenu
     };
+
+    this.fs.copyTpl(
+      this.templatePath('../../common/build/*.*'),
+      this.destinationPath(moduleName + '/_BuildScripts'),
+      template
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('../../common/csproj/Providers/**'),
+      this.destinationPath(moduleName + '/Providers'),
+      template
+    );
 
     this.fs.copyTpl(
       this.templatePath('../../common/csproj/NuGet.config'),
@@ -120,15 +115,22 @@ module.exports = class extends DnnGeneratorBase {
       template
     );
 
+    // Do all templated copies
     this.fs.copyTpl(
-      this.templatePath('../../common/packaging/**'),
-      this.destinationPath(moduleName + '/'),
+      this.templatePath('../../common/src/**'),
+      this.destinationPath(moduleName + '/src/'),
       template
     );
 
     this.fs.copyTpl(
       this.templatePath('App_LocalResources/**'),
       this.destinationPath(moduleName + '/App_LocalResources/'),
+      template
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('_BuildScripts/**'),
+      this.destinationPath(moduleName + '/_BuildScripts/'),
       template
     );
 
@@ -145,32 +147,14 @@ module.exports = class extends DnnGeneratorBase {
     );
 
     this.fs.copyTpl(
-      this.templatePath('Data/**'),
-      this.destinationPath(moduleName + '/Data/'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('Images/**'),
-      this.destinationPath(moduleName + '/Images/'),
-      template
-    );
-
-    this.fs.copyTpl(
       this.templatePath('Models/**'),
       this.destinationPath(moduleName + '/Models/'),
       template
     );
 
     this.fs.copyTpl(
-      this.templatePath('Properties/**'),
-      this.destinationPath(moduleName + '/Properties/'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('Providers/**'),
-      this.destinationPath(moduleName + '/Providers/'),
+      this.templatePath('src/**'),
+      this.destinationPath(moduleName + '/src/'),
       template
     );
 
@@ -181,50 +165,30 @@ module.exports = class extends DnnGeneratorBase {
     );
 
     this.fs.copyTpl(
+      this.templatePath('RouteConfig.cs'),
+      this.destinationPath(moduleName + '/RouteConfig.cs'),
+      {
+        namespace: namespace,
+        moduleName: moduleName
+      }
+    );
+
+    this.fs.copyTpl(
       this.templatePath('manifest.dnn'),
       this.destinationPath(moduleName + '/' + moduleName + '.dnn'),
-      template
+      {
+        namespace: namespace,
+        moduleName: moduleName,
+        moduleFriendlyName: this.props.name,
+        description: this.props.description,
+        companyUrl: this.props.companyUrl,
+        emailAddy: this.props.emailAddy
+      }
     );
 
     this.fs.copyTpl(
-      this.templatePath('Module.build'),
-      this.destinationPath(moduleName + '/Module.build'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('Module.csproj'),
-      this.destinationPath(moduleName + '/' + fullNamespace + '.csproj'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('Module.css'),
-      this.destinationPath(moduleName + '/Module.css'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('Module.sln'),
-      this.destinationPath(moduleName + '/' + fullNamespace + '.sln'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('packages.config'),
-      this.destinationPath(moduleName + '/packages.config'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('symbols.dnn'),
-      this.destinationPath(moduleName + '/' + moduleName + '_Symbols.dnn'),
-      template
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('web.config'),
-      this.destinationPath(moduleName + '/web.config'),
+      this.templatePath('../../common/csproj/_Project.csproj'),
+      this.destinationPath(moduleName + '/' + moduleName + '.csproj'),
       template
     );
 
@@ -255,6 +219,7 @@ module.exports = class extends DnnGeneratorBase {
   }
 
   install() {
+    this._writeSolution();
     this._defaultInstall();
   }
 

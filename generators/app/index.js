@@ -27,7 +27,7 @@ module.exports = class extends Generator {
 
     this.log(
       chalk.white(
-        'This awesome command line tool scaffolds a DNN project/solution in your current directory.\n'
+        'This awesome command line tool scaffolds a DNN project/solution in the current directory.\n'
       )
     );
     this.log(
@@ -55,6 +55,7 @@ module.exports = class extends Generator {
 
     //
     // TODO: Add logic to look for solution folders (e.g., Modules) and disable the extensions below until the solution is created.
+	// TODO: Update the primary solution file when projects are added.
     //
 
     const prompts = [
@@ -65,9 +66,10 @@ module.exports = class extends Generator {
         message: 'What type of project would you like to scaffold?',
         choices: [
           solutionChoice,
-          { name: 'MVC Module', value: 'mvc' },
-          { name: 'SPA Module', value: 'spa' },
-          { name: 'Webforms Module', value: 'webforms' },
+          { name: 'Module (Webforms)', value: 'webforms' },
+          { name: 'Module (MVC)', value: 'mvc' },
+          { name: 'Module (MVC, .NET Core)', value: 'mvc-core' },
+          { name: 'Module (SPA)', value: 'spa' },
           { name: 'Persona Bar', value: 'personabar' },
           { name: 'Skin Object', value: 'skinobject' },
           { name: 'Library', value: 'library' },
@@ -101,8 +103,6 @@ module.exports = class extends Generator {
     const options = {
       projType: this.props.value
     };
-
-    //this.log(chalk.yellow('Looking for: ' + this.props.projType));
 
     this.composeWith(require.resolve('../' + this.props.projType), options);
   }
