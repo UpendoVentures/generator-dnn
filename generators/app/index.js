@@ -90,12 +90,12 @@ module.exports = class extends Generator {
             disabled: chalk.gray('Coming Soon')
           }
         ]
-      }/*,
+      },
       {
         when: !this.options.dnnHost,
         type: 'input',
         name: 'dnnHost',
-        message: 'What is the URL to your local DNN site?',
+        message: 'What is the URL to your local DNN site? (currently only used by SPA templates)',
         default: 'http://dnndev.me',
         store: true,
         validate: str => {
@@ -106,12 +106,12 @@ module.exports = class extends Generator {
         when: !this.options.dnnRoot,
         type: 'input',
         name: 'dnnRoot',
-        message: 'What is the local path to the root of your DNN site?',
+        message: 'What is the local path to the root of your DNN site? (currently only used by SPA templates)',
         store: true,
         validate: str => {
           return str.length > 0;
         }
-      }*/
+      }
     ];
 
     return this.prompt(prompts).then(props => {
@@ -122,7 +122,9 @@ module.exports = class extends Generator {
 
   composing() {
     const options = {
-      projType: this.props.value
+      projType: this.props.value,
+      dnnHost: this.props.dnnHost,
+      dnnRoot: this.props.dnnRoot
     };
 
     this.composeWith(require.resolve('../' + this.props.projType), options);
@@ -130,7 +132,5 @@ module.exports = class extends Generator {
 
   writing() {}
 
-  install() {
-    // This.installDependencies({ npm: true, bower: false, yarn: false });
-  }
+  install() {}
 };
