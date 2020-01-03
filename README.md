@@ -1,6 +1,8 @@
 # generator-dnn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > Scaffolds DNN Modules, Persona Bar, Skin projects
 
+Learn more about DNN CMS at [the official DNN community website](https://dncommunity.org).
+
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-dnn using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
